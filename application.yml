@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: analytics-search
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:analytics_search}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:mahadev$1}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  port: ${SERVER_PORT:8080}
+
+# Embedding provider: "local" (default, no API key needed) or "openai" (real semantic embeddings).
+embedding:
+  provider: ${EMBEDDING_PROVIDER:local}
+  dimension: ${EMBEDDING_DIMENSION:384}
+
+openai:
+  api-key: ${OPENAI_API_KEY:}
+  embedding-model: ${OPENAI_EMBEDDING_MODEL:text-embedding-3-small}
+
+logging:
+  level:
+    com.example.analytics: INFO

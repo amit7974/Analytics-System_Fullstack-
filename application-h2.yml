@@ -1,0 +1,20 @@
+# Run with: --spring.profiles.active=h2
+# Useful for a zero-setup local demo/test run without installing MySQL.
+# The rest of the code is unchanged: same JPA entities/repositories work against H2 in
+# MySQL compatibility mode, and against real MySQL in the default profile.
+spring:
+  datasource:
+    url: jdbc:h2:mem:analytics_search;MODE=MySQL;DB_CLOSE_DELAY=-1
+    username: root
+    password: "mahadev$1"
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
